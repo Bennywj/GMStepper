@@ -8,7 +8,16 @@
 
 import UIKit
 
+public protocol GMStepperLimitHitDelegate {
+
+    func reachMinValue(minValue: Double)
+
+    func reachMaxValue(maxValue: Double)
+}
+
 @IBDesignable public class GMStepper: UIControl {
+
+    public var delegate: GMStepperLimitHitDelegate?
 
     /// Current value of the stepper. Defaults to 0.
     @objc @IBInspectable public var value: Double = 0 {
@@ -483,8 +492,10 @@ extension GMStepper {
     func animateLimitHitIfNeeded() {
         if value == minimumValue {
             animateLimitHitForButton(button: leftButton)
+            delegate?.reachMinValue(minValue: minimumValue)
         } else if value == maximumValue {
             animateLimitHitForButton(button: rightButton)
+            delegate?.reachMaxValue(maxValue: maximumValue)
         }
     }
 
