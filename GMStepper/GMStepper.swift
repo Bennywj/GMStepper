@@ -320,7 +320,7 @@ public protocol GMStepperLimitHitDelegate {
         clipsToBounds = true
         labelOriginalCenter = label.center
 
-        NotificationCenter.default.addObserver(self, selector: #selector(GMStepper.reset), name: NSNotification.Name.UIApplicationWillResignActive, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(GMStepper.reset), name: UIApplication.willResignActiveNotification, object: nil)
     }
 
     public override func layoutSubviews() {
